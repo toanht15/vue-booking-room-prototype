@@ -21,11 +21,18 @@ var app = new Vue({
                 document.body.classList.remove(className);
             }
         }
+    },
+    created: function () {
+        document.addEventListener('keyup', this.escapeKeyListener);
+    },
+    destroyed: function () {
+      document.removeEventListener('keyup', this.escapeKeyListener)
+    },
+    methods: {
+        escapeKeyListener: function () {
+            if (evt.keyCode === 27 && app.modalOpen) {
+                app.modalOpen = false;
+            }
+        }
     }
-});
-
-document.addEventListener(</span>'keyup', function(evt) {
-if (evt.keyCode === 27 && app.modalOpen) {
-    app.modalOpen = false;
-}
 });
